@@ -31,13 +31,35 @@ while True:
      #apply canny edge detection
     cannyed_image = cv2.Canny(grayImage, 50, 100)
     
-#     #display the canny edge image using the matplotlib library
-#     #plt.figure()
-#     #plt.imshow(cannyed_image, cmap='gray')
-#     #plt.show()
-    cv2.imshow('canny', cannyed_image)
+    
+    #cv2.imshow('canny', cannyed_image)
 
 #    cv2.imshow('result', result)
+
+# declare lines and set it to "Auto detect" using HoughLinesP
+    lines = cv2.HoughLines(cannyed_image, 1, np.pi/180, 30)
+
+# for each line in lines draw a green line on the x and y cords
+#    for line in lines:
+ #       x1, y1, x2, y2 = line[0]
+ #       cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
+
+    if lines is not None:
+        # For each line in lines, draw a green line on the x and y coordinates
+        for rho, theta in lines[:, 0]:
+            # Convert polar coordinates to Cartesian coordinates
+            a = np.cos(theta)
+            b = np.sin(theta)
+            x0 = a * rho
+            y0 = b * rho
+            x1 = int(x0 + 1000 * (-b))
+            y1 = int(y0 + 1000 * (a))
+            x2 = int(x0 - 1000 * (-b))
+            y2 = int(y0 - 1000 * (a))
+
+            cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 1)
+
+    cv2.imshow('img', img)
 
 #if "q" key is pressed then break loop and destroy all windows 
     if cv2.waitKey(1) == ord('q'):
