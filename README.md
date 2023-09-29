@@ -2,8 +2,6 @@
 
 ![answer.png](answer.png)
 
-answer.png
-
 ## Methodology
 
 1. Import the image and resize it for testing purposes. The image initially was larger than my screen, and when running the code, it was difficult to see the effects of the image manipulation during testing.
