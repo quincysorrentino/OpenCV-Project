@@ -7,23 +7,30 @@ import numpy as np
 # define the draw_lines function, setting color and thickness
 def draw_lines(img, lines, color=[0, 0, 255], thickness=2):
     
-    # If there are no lines to draw return the original image and exit.
+# If there are no lines to draw return the original image and exit.
     if lines is None:
         # Return the original image
         return img  
     
-    # Create a blank image that matches the original in size.
+# Create a blank image that matches the original in size.
     line_img = np.zeros_like(img, dtype=np.uint8)
+    #Find the height of the image 
+    height = img.shape[0]
 
-    # Loop over all lines and draw them on the new blank image.
+# Loop over all lines and draw them from the top to the bottom of the image.
     for line in lines:
         for x1, y1, x2, y2 in line:
-            cv2.line(line_img, (x1, y1), (x2, y2), color, thickness)
+# Calculate the extended points at the top and bottom of the image
+            extended_x1 = int(x1 - (y1 - 0) * (x2 - x1) / (y2 - y1))
+            extended_x2 = int(x2 - (y2 - height) * (x2 - x1) / (y2 - y1))
+                
+# Draw the line from top to bottom
+            cv2.line(line_img, (extended_x1, 0), (extended_x2, height), color, thickness)
 
-    # Merge the image with the lines onto the original.
+# Merge the image with the lines onto the original.
     img = cv2.addWeighted(img, 0.8, line_img, 1.0, 0.0)
     
-    # Return the modified image.
+# Return the modified image.
     return img
 
 ########################################################### METHODS ##############################################################################
@@ -68,7 +75,7 @@ while True:
 
 #Display the image      
     cv2.imshow('result', img)
-    cv2.imwrite('answer.png', img)
+    
 #This print statement can be used to show the arrays for the lines and how many lines were drawn (2)  
 #print(lines)
 
