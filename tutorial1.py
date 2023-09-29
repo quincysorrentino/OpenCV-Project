@@ -68,7 +68,7 @@ while True:
 
 #Display the image      
     cv2.imshow('result', img)
-    
+    cv2.imwrite('answer.png', img)
 #This print statement can be used to show the arrays for the lines and how many lines were drawn (2)  
 #print(lines)
 
