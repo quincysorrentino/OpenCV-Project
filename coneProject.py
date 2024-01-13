@@ -7,9 +7,7 @@ import numpy as np
 # define the draw_lines function, setting color and thickness
 def draw_lines(img, lines, color=[0, 0, 255], thickness=2):
     
-# If there are no lines to draw return the original image and exit.
     if lines is None:
-        # Return the original image
         return img  
     
 # Create a blank image that matches the original in size.
@@ -30,7 +28,6 @@ def draw_lines(img, lines, color=[0, 0, 255], thickness=2):
 # Merge the image with the lines onto the original.
     img = cv2.addWeighted(img, 0.8, line_img, 1.0, 0.0)
     
-# Return the modified image.
     return img
 
 ########################################################### METHODS ##############################################################################
@@ -52,8 +49,7 @@ while True:
 
 #create a color mask using inRange() filled with the upper and lower parameters declared above 
     colorMask = cv2.inRange(img, lower_orange, upper_orange)
-
-#create a kernel (unclear exactly what this is) 
+ 
     kernel = np.ones((5,5),np.uint8)
 #use the closing effect to fill in blank spots missed by the color map
 #this is done so shapes are filled instead of spotty
@@ -68,7 +64,6 @@ while True:
 #use HoughLinesP() with various parameters to detect lines (Took forever to get the parameters right)
     lines = cv2.HoughLinesP(cannyed_image, rho=5, theta=np.pi / 180, threshold=86, lines=np.array([]), minLineLength=330, maxLineGap=200)
 
-#if there are lines detected then draw them on "img"
     if lines is not None:  
 # Draw the detected lines on the image
         img = draw_lines(img, lines)
