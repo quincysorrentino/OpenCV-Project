@@ -33,7 +33,7 @@ I originally tried to create the color mask using some values for orange I found
 
 This was one of the most important steps in the whole process because for the Canny edge detection process to work properly the cones have to be properly masked. 
 
-Another difficult roadblock that I had to overcome in this porject was the tweaking of parameters in the Hough line detection method. Based off the documentation the parameters, especially `rho` and `theta` are slightly vauge. It took a while to eventually narrow down these parameters so that only two lines were created in the end. 
+Another difficult roadblock that I had to overcome in this porject was the tweaking of parameters in the Hough line detection method. Based off the documentation the parameters, especially `rho` and `theta` are slightly vauge. It took a while to eventually narrow down these parameters so that only two lines were created. 
 
 ## What Libraries Are Used?
 For this project, I chose to use:
